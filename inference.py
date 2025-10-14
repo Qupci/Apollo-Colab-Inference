@@ -27,7 +27,7 @@ def load_audio(file_path):
 
 def save_audio(file_path, audio, samplerate=44100):
     #audio = dBgain(audio, +6)
-    sf.write(file_path, audio.T, samplerate, subtype="PCM_16")
+    sf.write(file_path, audio.T, samplerate, subtype="FLOAT")
 
 def process_chunk(chunk):
     chunk = chunk.unsqueeze(0).cuda()
@@ -132,7 +132,7 @@ if __name__ == "__main__":
     parser.add_argument("--in_wav", type=str, required=True, help="Path to input wav file")
     parser.add_argument("--out_wav", type=str, required=True, help="Path to output wav file")
     parser.add_argument("--ckpt", type=str, required=True, help="Path to model checkpoint file", default="model/pytorch_model.bin")
-    parser.add_argument("--config", type=str, help="Path to model config file", default="configs/apollo.yaml")
+    parser.add_argument("--config", type=str, help="Path to model config file", default="config/apollo.yaml")
     parser.add_argument("--chunk_size", type=int, help="chunk size value in seconds", default=10)
     parser.add_argument("--overlap", type=int, help="Overlap", default=2)
     args = parser.parse_args()
